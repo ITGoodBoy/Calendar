@@ -6,8 +6,10 @@ import java.time.temporal.TemporalAdjusters;
 
 public class GraphicCalendar extends JFrame {
 
+
     private String[] daysOfWeek = {"Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Нд"};
     private LocalDate localDate;
+    private JPanel jPanel;
 
     //constructor without parameters, shows the current year, month, day.
     public GraphicCalendar()
@@ -56,7 +58,7 @@ public class GraphicCalendar extends JFrame {
 
 
     private void GraphicCalendarInitialize(int year, Month month, int dayOfMonth, int calendarWidth, int calendarHeight,
-                                                 Color calendarWeekend, Color currentDayOfMonth)
+                                           Color calendarWeekend, Color currentDayOfMonth)
     {
         //create date to set the value of year, month, day of the month
         LocalDate date = LocalDate.of(year, month, dayOfMonth);
@@ -70,7 +72,7 @@ public class GraphicCalendar extends JFrame {
         }
         else numberOfDays = month.minLength();
         //create a panel with the table
-        JPanel jPanel = new JPanel(new GridLayout(0, 7));
+         jPanel = new JPanel(new GridLayout(0, 7));
         //add the days of the week in the first row
         for (int i = 0; i < 7; i++) {
             jPanel.add(new Label(daysOfWeek[i]));
@@ -107,6 +109,9 @@ public class GraphicCalendar extends JFrame {
 
     public void setDaysOfWeek(String[] daysOfWeek) {
         this.daysOfWeek = daysOfWeek;
+        for (int i = 0; i < 7; i++) {
+            ((Label) jPanel.getComponents()[i]).setText(this.daysOfWeek[i]);
+        }
     }
 
     public String[] getDaysOfWeek() {
